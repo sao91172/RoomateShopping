@@ -76,9 +76,9 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
             public void onClick(View v) {
                 //Log.d( TAG, "onBindViewHolder: getItemId: " + holder.getItemId() );
                 //Log.d( TAG, "onBindViewHolder: getAdapterPosition: " + holder.getAdapterPosition() );
-                EditItemDialogFragment editItemFragment =
-                        EditItemDialogFragment.newInstance( holder.getAdapterPosition(), key, name, price);
-                editItemFragment.show( ((AppCompatActivity)context).getSupportFragmentManager(), null);
+//                EditItemDialogFragment editItemFragment =
+//                        EditItemDialogFragment.newInstance( holder.getAdapterPosition(), key, name, price);
+//                editItemFragment.show( ((AppCompatActivity)context).getSupportFragmentManager(), null);
             }
         });
     }
