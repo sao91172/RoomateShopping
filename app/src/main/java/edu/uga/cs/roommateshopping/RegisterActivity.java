@@ -37,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     public FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,39 +48,39 @@ public class RegisterActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.pwEditText);
 
+
         mAuth = FirebaseAuth.getInstance();
+
+
+
+//        String email = "dawg@mail.com";
+//        String password = "Password";
 
         registerButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-
-
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    // Sign in success, update UI with the signed-in user's information
-//                                    Log.d(TAG, "createUserWithEmail:success");
-//                                    FirebaseUser user = mAuth.getCurrentUser();
-//                                    updateUI(user);
-//                                } else {
-//                                    // If sign in fails, display a message to the user.
-//                                    Log.d(TAG, "createUserWithEmail:failure", task.getException());
-//                                    Toast.makeText(RegisterActivity.this, "Authentication failed.",
-//                                            Toast.LENGTH_SHORT).show();
-//                                    updateUI(null);
-//                                }
-                                if (!task.isSuccessful()) {
-                                    //shows error message if this is a duplicate email
-                                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                        Toast.makeText(RegisterActivity.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
-                                    }
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                    startActivity(new Intent(RegisterActivity.this,Navigation.class));
+
                                 } else {
-                                    //Toast.makeText(RegisterActivity.this, "User signed in successfully!", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    // If sign in fails, display a message to the user.
+                                    Log.d(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                    if(task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                        Toast.makeText(RegisterActivity.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         });
@@ -88,7 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 //        mAuth.signInWithEmailAndPassword(email, password)
-//
 //                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
 //                    @Override
 //                    public void onComplete(Task<AuthResult> task) {
@@ -107,13 +107,19 @@ public class RegisterActivity extends AppCompatActivity {
     public void updateUI(FirebaseUser account) {
         if (account != null) {
             Toast.makeText(this, "Signed in successfully", Toast.LENGTH_LONG).cancel();
-           // startActivity(new Intent(this, NavigationActivity.class));
+            //startActivity(new Intent(this, MainActivity.class));
     } else {
             Toast.makeText(this,"Please sign in", Toast.LENGTH_LONG).show();
         }
 
 
+
+
+
+
         DatabaseReference myRef = database.getReference( "message" );
+       // DatabaseReference myRef = database;
+
 
         // Read from the database value for ”message”
         myRef.addValueEventListener( new ValueEventListener() {

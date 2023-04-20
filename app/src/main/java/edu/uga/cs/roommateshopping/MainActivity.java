@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
+                    .setIsSmartLockEnabled(false) //added
                     // this sets our own theme (color scheme, sizing, etc.) for the AuthUI's appearance
 //                    .setTheme(R.style.LoginTheme)
                     .build();
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
             if( response != null ) {
                 Log.d( DEBUG_TAG, "MainActivity.onSignInResult: response.getEmail(): " + response.getEmail() );
             }
+            Intent intent = new Intent( this, Navigation.class );
+            startActivity( intent );
 
             //Log.d( DEBUG_TAG, "MainActivity.onSignInResult: Signed in as: " + user.getEmail() );
 
