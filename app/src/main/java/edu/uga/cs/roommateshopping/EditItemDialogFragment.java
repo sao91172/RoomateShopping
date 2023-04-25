@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 
-public class EditItemDialogFragment extends Fragment {
+public class EditItemDialogFragment extends DialogFragment {
 
     // indicate the type of an edit
     public static final int SAVE = 1;   // update an existing job lead

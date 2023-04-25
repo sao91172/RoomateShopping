@@ -53,11 +53,37 @@ public class Navigation extends AppCompatActivity {
         Button logoutButton = findViewById(R.id.logout);
 
         addItemButton.setOnClickListener(new AddItemButtonClickListener());
-
+        personalListButton.setOnClickListener(new PersonalListButtonClickListener());
+        cartButton.setOnClickListener(new CartButtonClickListener());
+        settleCostButton.setOnClickListener(new SettleCostButtonClickListener());
         logoutButton.setOnClickListener(new LogoutButtonClickListener());
 
     }
     private class AddItemButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), AddItemActivity.class);
+            view.getContext().startActivity( intent );
+        }
+    }
+
+    private class PersonalListButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), PersonalShoppingList.class);
+            view.getContext().startActivity( intent );
+        }
+    }
+
+    private class CartButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), AddItemActivity.class);
+            view.getContext().startActivity( intent );
+        }
+    }
+
+    private class SettleCostButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), AddItemActivity.class);

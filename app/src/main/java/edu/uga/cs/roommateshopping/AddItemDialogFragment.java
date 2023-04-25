@@ -1,4 +1,4 @@
-package edu.uga.cs.roommateshopping.;
+package edu.uga.cs.roommateshopping;
 
 import android.app.Dialog;
 import android.content.Context;

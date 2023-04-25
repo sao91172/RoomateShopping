@@ -56,7 +56,7 @@ public class PersonalShoppingList extends AppCompatActivity
                 newFragment.show( getSupportFragmentManager(), null);
             }
         });
-        // initialize the Job Lead list
+        // initialize the Item list
         itemList = new ArrayList<Item>();
 
         // use a linear layout manager for the recycler view
@@ -69,7 +69,7 @@ public class PersonalShoppingList extends AppCompatActivity
 
         // get a Firebase DB instance reference
         database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("jobleads");
+        DatabaseReference myRef = database.getReference("items");
     }
     // this is our own callback for a AddJobLeadDialogFragment which adds a new job lead.
     public void addItem(Item item) {
@@ -98,15 +98,16 @@ public class PersonalShoppingList extends AppCompatActivity
                         recyclerView.post( new Runnable() {
                             @Override
                             public void run() {
-                                recyclerView.smoothScrollToPosition( itemList.size()-1 );
+//                                recyclerView.smoothScrollToPosition( itemList.size()-1 );
+                                recyclerView.smoothScrollToPosition( itemList.size());
+
                             }
                         } );
 
                         Log.d( DEBUG_TAG, "Item saved: " + item );
                         // Show a quick confirmation
-                        Toast.makeText(getApplicationContext(), "Item " + item.getName() + "added successfully!",
+                        Toast.makeText(getApplicationContext(), "Item " + item.getName() + " added successfully!",
                                 Toast.LENGTH_SHORT).show();
-
                     }
                 })
                 .addOnFailureListener( new OnFailureListener() {
@@ -123,7 +124,7 @@ public class PersonalShoppingList extends AppCompatActivity
     // It is called from the EditJobLeadDialogFragment.
     public void updateItem( int position, Item item, int action ) {
         if( action == EditItemDialogFragment.SAVE ) {
-            Log.d( DEBUG_TAG, "Updating job lead at: " + position + "(" + item.getName() + ")" );
+            Log.d( DEBUG_TAG, "Updating item at: " + position + "(" + item.getName() + ")" );
 
             // Update the recycler view to show the changes in the updated job lead in that view
             recyclerAdapter.notifyItemChanged( position );
@@ -159,7 +160,7 @@ public class PersonalShoppingList extends AppCompatActivity
             });
         }
         else if( action == EditItemDialogFragment.DELETE ) {
-            Log.d( DEBUG_TAG, "Deleting job lead at: " + position + "(" + item.getName() + ")" );
+            Log.d( DEBUG_TAG, "Deleting item at: " + position + "(" + item.getName() + ")" );
 
             // remove the deleted job lead from the list (internal list in the App)
            itemList.remove( position );
@@ -200,4 +201,3 @@ public class PersonalShoppingList extends AppCompatActivity
 }
 
 
-}

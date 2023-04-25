@@ -13,7 +13,8 @@
         android:text="New Item"
         android:textAlignment="center"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="153dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="129dp" />
 
     <EditText
@@ -24,8 +25,9 @@
         android:ems="10"
         android:hint="Item"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
         android:id="@+id/itemPrice"
@@ -35,8 +37,9 @@
         android:ems="10"
         android:hint="Price"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/itemName"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <Button
         android:id="@+id/saveItem"
@@ -44,8 +47,9 @@
         android:layout_height="54dp"
         android:layout_marginTop="104dp"
         android:text="save item"
-        app:layout_constraintTop_toBottomOf="@+id/itemPrice"
-        tools:layout_editor_absoluteX="109dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
 
     <TextView
         android:id="@+id/textView6"
@@ -54,5 +58,6 @@
         android:text="$"
         android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/itemPrice"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="425dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
