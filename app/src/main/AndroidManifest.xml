@@ -14,6 +14,12 @@
         android:theme="@style/Theme.RoomateShopping"
         tools:targetApi="31">
         <activity
+            android:name=".SettleCostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ItemRecyclerAdapter"
             android:exported="false" />
         <activity

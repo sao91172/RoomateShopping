@@ -50,7 +50,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
     // This method fills in the values of the Views to show an item
     @Override
     public void onBindViewHolder( ItemHolder holder, int position ) {
-        Item item = itemList.get( position + 1 );
+        Item item = itemList.get( position );
 
         Log.d( DEBUG_TAG, "onBindViewHolder: " + item );
 

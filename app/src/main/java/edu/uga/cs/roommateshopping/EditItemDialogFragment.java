@@ -13,7 +13,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class EditItemDialogFragment extends DialogFragment {
@@ -25,6 +31,7 @@ public class EditItemDialogFragment extends DialogFragment {
     private EditText itemNameView;
     private EditText priceView;
 
+    private Button shoppingButton;
     int position;     // the position of the edited JobLead on the list of job leads
     String key;
     String name;
@@ -67,6 +74,19 @@ public class EditItemDialogFragment extends DialogFragment {
 
         itemNameView = layout.findViewById( R.id.editText1 );
         priceView = layout.findViewById( R.id.editText2 );
+        shoppingButton = layout.findViewById(R.id.addShopping);
+
+        shoppingButton.setEnabled(true);
+
+        if (getActivity() instanceof CartActivity) {
+            shoppingButton.setText("Move back to \"all items\" list");
+            shoppingButton.setOnClickListener(new MoveBackListener());
+        } else if (getActivity() instanceof SettleCostActivity) {
+            shoppingButton.setText("Move back to basket");
+            shoppingButton.setOnClickListener(new RemoveClickListener());
+        }else {
+            shoppingButton.setOnClickListener(new AddShopListener());
+        }
 
 
         // Pre-fill the edit texts with the current values for this job lead.
@@ -132,5 +152,111 @@ public class EditItemDialogFragment extends DialogFragment {
             dismiss();
         }
     }
+
+    private class AddShopListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String name = itemNameView.getText().toString();
+            double price = Double.parseDouble(priceView.getText().toString());
+            Item item = new Item(name, price);
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("cart");
+
+            myRef.push().setValue( item )
+                    .addOnSuccessListener( new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Clear the EditTexts for next use.
+                            itemNameView.setText("");
+                            priceView.setText("");
+                        }
+                    })
+                    .addOnFailureListener( new OnFailureListener() {
+                        @Override
+                        public void onFailure( @NonNull Exception e ) {
+                            // do nothing
+                        }
+                    });
+
+            item.setKey(key);
+            // deleting the item from the FireBase database
+            EditItemDialogFragment.EditItemDialogListener listener = (EditItemDialogFragment.EditItemDialogListener) getActivity();
+            listener.updateItem( position, item, DELETE );
+            shoppingButton.setEnabled(false);
+        }
+    } // AddShopListener
+
+
+    private class MoveBackListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String name = itemNameView.getText().toString();
+            double price = Double.parseDouble(priceView.getText().toString());
+            final Item item = new Item(name, price);
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("items");
+
+            myRef.push().setValue( item )
+                    .addOnSuccessListener( new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Clear the EditTexts for next use.
+                            itemNameView.setText("");
+                            priceView.setText("");
+                        }
+                    })
+                    .addOnFailureListener( new OnFailureListener() {
+                        @Override
+                        public void onFailure( @NonNull Exception e ) {
+                            // do nothing
+                        }
+                    });
+
+            item.setKey(key);
+            // deleting the item from the FireBase database
+            EditItemDialogFragment.EditItemDialogListener listener = (EditItemDialogFragment.EditItemDialogListener) getActivity();
+            listener.updateItem( position, item, DELETE );
+            shoppingButton.setEnabled(false);
+        }
+
+    } //MoveBackListener
+
+
+    private class RemoveClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String name = itemNameView.getText().toString();
+            double price = Double.parseDouble(priceView.getText().toString());
+            final Item item = new Item(name, price);
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("cart");
+
+            myRef.push().setValue( item )
+                    .addOnSuccessListener( new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Clear the EditTexts for next use.
+                            itemNameView.setText("");
+                            priceView.setText("");
+                        }
+                    })
+                    .addOnFailureListener( new OnFailureListener() {
+                        @Override
+                        public void onFailure( @NonNull Exception e ) {
+                            // do nothing
+                        }
+                    });
+
+            item.setKey(key);
+            // deleting the item from the FireBase database
+            EditItemDialogFragment.EditItemDialogListener listener = (EditItemDialogFragment.EditItemDialogListener) getActivity();
+            listener.updateItem( position, item, DELETE );
+            shoppingButton.setEnabled(false);
+        }
+
+    } //MoveBackListener
 
 }

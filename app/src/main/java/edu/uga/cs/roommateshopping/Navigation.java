@@ -78,16 +78,16 @@ public class Navigation extends AppCompatActivity {
     private class CartButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-//            Intent intent = new Intent(view.getContext(), CartActivity.class);
-//            view.getContext().startActivity( intent );
+            Intent intent = new Intent(view.getContext(), CartActivity.class);
+            view.getContext().startActivity( intent );
         }
     }
 
     private class SettleCostButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-//            Intent intent = new Intent(view.getContext(), SettleCostActivity.class);
-//            view.getContext().startActivity( intent );
+            Intent intent = new Intent(view.getContext(), SettleCostActivity.class);
+            view.getContext().startActivity( intent );
         }
     }
 
