@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="45dp"
         android:padding="10dp"
-        android:text="A simple app to maintain information about job lead prospects"
+        android:text="An app to share a shopping list with your roommates"
+        android:textColor="#040303"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

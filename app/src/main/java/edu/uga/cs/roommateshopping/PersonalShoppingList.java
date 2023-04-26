@@ -63,14 +63,45 @@ public class PersonalShoppingList extends AppCompatActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // the recycler adapter with job leads is empty at first; it will be updated later
+        // the recycler adapter with items is empty at first; it will be updated later
         recyclerAdapter = new ItemRecyclerAdapter( itemList, PersonalShoppingList.this );
         recyclerView.setAdapter( recyclerAdapter );
 
         // get a Firebase DB instance reference
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("items");
-    }
+
+        // Set up a listener (event handler) to receive a value for the database reference.
+        // This type of listener is called by Firebase once by immediately executing its onDataChange method
+        // and then each time the value at Firebase changes.
+        //
+        // This listener will be invoked asynchronously, hence no need for an AsyncTask class, as in the previous apps
+        // to maintain job leads.
+        myRef.addValueEventListener( new ValueEventListener() {
+
+            @Override
+            public void onDataChange( @NonNull DataSnapshot snapshot ) {
+                // Once we have a DataSnapshot object, we need to iterate over the elements and place them on our job lead list.
+                itemList.clear(); // clear the current content; this is inefficient!
+                for( DataSnapshot postSnapshot: snapshot.getChildren() ) {
+                    Item item = postSnapshot.getValue(Item.class);
+                    item.setKey( postSnapshot.getKey() );
+                    itemList.add( item );
+                    Log.d( DEBUG_TAG, "ValueEventListener: added: " + item);
+                    Log.d( DEBUG_TAG, "ValueEventListener: key: " + postSnapshot.getKey() );
+                }
+
+                Log.d( DEBUG_TAG, "ValueEventListener: notifying recyclerAdapter" );
+                recyclerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled( @NonNull DatabaseError databaseError ) {
+                System.out.println( "ValueEventListener: reading failed: " + databaseError.getMessage() );
+            }
+        } );
+    } //onCreate
+
     // this is our own callback for a AddJobLeadDialogFragment which adds a new job lead.
     public void addItem(Item item) {
         // add the new job lead
