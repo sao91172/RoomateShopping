@@ -244,7 +244,6 @@ public class CartActivity extends AppCompatActivity implements AddItemDialogFrag
                         .addOnSuccessListener( new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
                             }
                         })
                         .addOnFailureListener( new OnFailureListener() {

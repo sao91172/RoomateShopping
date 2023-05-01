@@ -79,7 +79,7 @@ public class EditItemDialogFragment extends DialogFragment {
         shoppingButton.setEnabled(true);
 
         if (getActivity() instanceof CartActivity) {
-            shoppingButton.setText("Move back to \"all items\" list");
+            shoppingButton.setText("Move back to \"shopping\" list");
             shoppingButton.setOnClickListener(new MoveBackListener());
         } else if (getActivity() instanceof SettleCostActivity) {
             shoppingButton.setText("Move back to basket");
