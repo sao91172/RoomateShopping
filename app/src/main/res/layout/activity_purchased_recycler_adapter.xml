@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PurchasedRecyclerAdapter">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        card_view:cardBackgroundColor="#0F0096"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="3dp"
-        card_view:cardMaxElevation="3dp"
-        card_view:contentPadding="25dp">
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="#05B683"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp"
+        app:cardMaxElevation="3dp"
+        app:contentPadding="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +25,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/itemname"
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="phone"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/itemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -29,7 +42,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/itemprice"
+                android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="phone"
@@ -40,4 +53,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

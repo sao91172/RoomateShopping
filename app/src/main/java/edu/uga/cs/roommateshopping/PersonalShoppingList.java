@@ -27,6 +27,7 @@ import java.util.List;
  * This is an activity class for listing the current items.
  * The current items are listed as a RecyclerView.
  */
+
 public class PersonalShoppingList extends AppCompatActivity
         implements AddItemDialogFragment.AddItemDialogListener,
         EditItemDialogFragment.EditItemDialogListener {
@@ -230,5 +231,6 @@ public class PersonalShoppingList extends AppCompatActivity
         }
     }
 }
+
 
 

@@ -16,7 +16,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         android:text="Signed in as: not signed in"
-        android:textColor="#020202"
+        android:textColor="#FAF6F6"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button1"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,54 +13,50 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * This is an adapter class for the RecyclerView to show all items.
- */
-
-public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapter.ItemHolder> {
-    public static final String DEBUG_TAG = "ItemRecyclerAdapter";
+public class PurchasedRecyclerAdapter extends RecyclerView.Adapter<PurchasedRecyclerAdapter.ItemHolder> {
 
     private List<Item> itemList;
     private Context context;
 
-    public ItemRecyclerAdapter( List<Item> itemList, Context context ) {
+    public PurchasedRecyclerAdapter(List<Item> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
     }
 
-    // The adapter must have a ViewHolder class to "hold" one item to show.
     class ItemHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView price;
+        TextView username;
 
-        TextView itemName;
-        TextView itemPrice;
-
-        public ItemHolder(View itemView ) {
+        public ItemHolder(View itemView) {
             super(itemView);
-            itemName = itemView.findViewById( R.id.itemname );
-            itemPrice = itemView.findViewById( R.id.itemprice );
+
+            name = itemView.findViewById(R.id.itemName);
+            price = itemView.findViewById(R.id.price);
+            username = itemView.findViewById(R.id.username);
         }
-    }
+    } // ItemHolder
+
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
-        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.item, parent, false );
+        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.activity_purchased_recycler_adapter, parent, false );
         return new ItemHolder( view );
     }
 
-    // This method fills in the values of the Views to show an item
+    // This method fills in the values of the Views to show a item
     @Override
     public void onBindViewHolder( ItemHolder holder, int position ) {
-        Item item = itemList.get(position);
-
-        Log.d( DEBUG_TAG, "onBindViewHolder: " + item );
+        Item item = itemList.get( position );
 
         String key = item.getKey();
         String name = item.getName();
         double price = item.getPrice();
 
+        holder.name.setText( item.getName());
+        holder.price.setText( String.valueOf(item.getPrice() ));
+        holder.username.setText(item.getUser());
 
-        holder.itemName.setText( item.getName());
-        holder.itemPrice.setText( String.valueOf(item.getPrice()));
 
         // We can attach an OnClickListener to the itemView of the holder;
         // itemView is a public field in the Holder class.
@@ -72,17 +67,17 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Log.d( TAG, "onBindViewHolder: getItemId: " + holder.getItemId() );
-                //Log.d( TAG, "onBindViewHolder: getAdapterPosition: " + holder.getAdapterPosition() );
-                EditItemDialogFragment editItemFragment =
+                EditItemDialogFragment editJobFragment =
                         EditItemDialogFragment.newInstance( holder.getAdapterPosition(), key, name, price);
-                editItemFragment.show( ((AppCompatActivity)context).getSupportFragmentManager(), null);
+                editJobFragment.show( ((AppCompatActivity)context).getSupportFragmentManager(), null);
             }
         });
-    }
+    } // onBindViewHolder
+
     @Override
     public int getItemCount() {
         return itemList.size();
     }
-}
 
+
+} // ItemRecyclerAdapter

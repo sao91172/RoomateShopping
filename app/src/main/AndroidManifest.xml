@@ -14,25 +14,38 @@
         android:theme="@style/Theme.RoomateShopping"
         tools:targetApi="31">
         <activity
+            android:name=".PurchasedRecyclerAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".TotalCostPageActivity"
+            android:parentActivityName=".SettleCostActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettleCostActivity"
+            android:parentActivityName=".Navigation"
             android:exported="false" />
         <activity
             android:name=".CartActivity"
+            android:parentActivityName=".Navigation"
             android:exported="false" />
         <activity
             android:name=".ItemRecyclerAdapter"
             android:exported="false" />
         <activity
             android:name=".PersonalShoppingList"
+            android:parentActivityName=".Navigation"
             android:exported="false" />
         <activity
             android:name=".AddItemActivity"
+            android:parentActivityName=".Navigation"
             android:exported="false" />
         <activity
             android:name=".Navigation"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
